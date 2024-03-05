@@ -23,12 +23,17 @@ public class InventoryItem
     public void UpdatePrice(double newPrice)
     {
         // TODO: Update the item's price with the new price.
+        Price = newPrice;
+        Console.WriteLine($"Price of {ItemName} updated to $ {Price}");
     }
 
     // Restock the item
     public void RestockItem(int additionalQuantity)
     {
         // TODO: Increase the item's stock quantity by the additional quantity.
+        QuantityInStock += additionalQuantity;
+        Console.WriteLine($"{additionalQuantity} new {ItemName}'s are added to stock. " +
+            $"Now we have {QuantityInStock} {ItemName}'s in stock");
     }
 
     // Sell an item
@@ -36,6 +41,15 @@ public class InventoryItem
     {
         // TODO: Decrease the item's stock quantity by the quantity sold.
         // Make sure the stock doesn't go negative.
+
+        if (quantitySold > QuantityInStock)
+        {
+            Console.WriteLine($"Error: Not enough {ItemName} in stock.");
+            return;
+        }
+
+        QuantityInStock -= quantitySold;
+        Console.WriteLine($"{quantitySold} {ItemName}'s sold. Only {QuantityInStock} {ItemName} left in stock");
     }
 
     // Check if an item is in stock
